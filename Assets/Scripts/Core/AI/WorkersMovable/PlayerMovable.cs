@@ -9,7 +9,7 @@ namespace Core.AI.WorkersMovable
         private  Worker _worker;
 
         private Rigidbody _rigidbody;
-        public RigidbodyMovable(Animator animator, Worker worker, Rigidbody rigidbody) : base(animator)
+        public RigidbodyMovable(Worker worker, Rigidbody rigidbody) 
         {
             _worker = worker;
             _rigidbody = rigidbody;
@@ -23,7 +23,7 @@ namespace Core.AI.WorkersMovable
             var moveDirection = normalizedDirection * 6;
              moveDirection.y = _rigidbody.velocity.y;
             _rigidbody.velocity = moveDirection;
-            Animator.SetFloat(AnimationsPrefsNames.Speed, Mathf.Round(Speed));
+            worker.Animator.SetFloat(AnimationsPrefsNames.Speed, Mathf.Round(Speed));
 
             if (normalizedDirection != Vector3.zero)
             {

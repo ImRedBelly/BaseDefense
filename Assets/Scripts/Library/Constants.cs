@@ -4,6 +4,7 @@
     {
         public static string Speed = "Speed";
         public static string IsCarrying = "IsCarrying";
+        public static string Idle = "DynIdle";
         public static string IsWorking = "IsWorking";
         public static string IsSitting = "IsSitting";
     }

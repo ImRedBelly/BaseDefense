@@ -7,7 +7,7 @@ namespace Core.AI.Workers
     {
         [SerializeField] private Transform orientation;
         protected virtual void Awake() => Movable =
-            new RigidbodyMovable(GetComponentInChildren<Animator>(), this, GetComponent<Rigidbody>());
+            new RigidbodyMovable(this, GetComponent<Rigidbody>());
 
         public override Vector3 Direction
         {

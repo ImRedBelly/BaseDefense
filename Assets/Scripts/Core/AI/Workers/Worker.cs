@@ -19,6 +19,7 @@ namespace Core.AI.Workers
     {
         public abstract Vector3 Direction { get; }
         public Movable Movable { get; protected set; } 
+        public Animator Animator { get; protected set; } 
         public Inventory Inventory { get; } = new Inventory();
 
         public WorkerStateMachine WorkerStateMachine = new WorkerStateMachine();
@@ -29,6 +30,7 @@ namespace Core.AI.Workers
 
         protected virtual void Start()
         {
+            Animator = GetComponentInChildren<Animator>();
             WorkerStateMachine.Start(this);
         }
 
@@ -46,7 +48,7 @@ namespace Core.AI.Workers
         
         protected virtual void ChangeInventory(Dictionary<ResourceType, int> ingredients)
         {
-            Movable.Animator.SetBool(AnimationsPrefsNames.IsCarrying, ingredients.Count > 0);
+            Animator.SetBool(AnimationsPrefsNames.IsCarrying, ingredients.Count > 0);
             inventoryView.UpdateView(ingredients);
         }
 

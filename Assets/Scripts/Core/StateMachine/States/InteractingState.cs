@@ -1,8 +1,7 @@
-using Core.AI;
-using Core.AI.Workers;
-using Core.Interaction;
 using Library;
 using UnityEngine;
+using Core.AI.Workers;
+using Core.Interaction;
 
 namespace Core.StateMachine.States
 {
@@ -22,8 +21,8 @@ namespace Core.StateMachine.States
         {
             base.OnEnter(worker);
 
-            worker.Movable.Animator.SetFloat(AnimationsPrefsNames.Speed, 0);
-            worker.Movable.Animator.SetBool(AnimationsPrefsNames.IsWorking, _interaction.GetBaseInteractionSetup().isAnimateWorker);
+            worker.Animator.SetFloat(AnimationsPrefsNames.Speed, 0);
+            worker.Animator.SetBool(AnimationsPrefsNames.IsWorking, _interaction.GetBaseInteractionSetup().isAnimateWorker);
             worker.gameObject.transform.LookAt(_interaction.transform);
 
             _workerInteractionTime = _interaction.GetBaseInteractionSetup().interactionTime;
@@ -65,7 +64,7 @@ namespace Core.StateMachine.States
 
         public override void OnExit(Worker worker)
         {
-            worker.Movable.Animator.SetBool(AnimationsPrefsNames.IsWorking, false);
+            worker.Animator.SetBool(AnimationsPrefsNames.IsWorking, false);
             base.OnExit(worker);
         }
     }

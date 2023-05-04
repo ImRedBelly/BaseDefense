@@ -1,6 +1,5 @@
-using Core.AI;
-using Core.AI.Workers;
 using Library;
+using Core.AI.Workers;
 
 namespace Core.StateMachine.States
 {
@@ -9,7 +8,7 @@ namespace Core.StateMachine.States
         public override void OnEnter(Worker worker)
         {
             base.OnEnter(worker);
-            worker.Movable.Animator.SetFloat(AnimationsPrefsNames.Speed, 0);
+            worker.Animator.SetFloat(AnimationsPrefsNames.Speed, 0);
         }
 
         public override void Update()
