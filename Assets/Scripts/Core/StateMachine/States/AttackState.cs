@@ -13,8 +13,6 @@ namespace Core.StateMachine.States
         {
             base.OnEnter(character);
             Character.Animator.SetBool(AnimationsPrefsNames.IsWeapon, true);
-
-            //character.transform.localRotation = Quaternion.Euler(0, character.transform.rotation.eulerAngles.y, 0);
         }
 
 

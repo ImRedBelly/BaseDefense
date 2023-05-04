@@ -1,24 +1,43 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Core.AI.WorkerAttachment;
+using UI;
 using UnityEngine;
-using Core.AI.WorkersMovable;
+using Core.Weapons;
 using Core.Interactions;
 using Setups.CharacterSetups;
+using Core.AI.CharacterMovable;
+using Core.AI.CharacterAttachment;
+using Zenject;
 
 namespace Core.AI.Workers
 {
     public sealed class PlayerController : Character<PlayerSetup>
     {
+        public IWeapon CurrentWeapon;
+
         [SerializeField] private Transform orientation;
+        [SerializeField] public Transform attackPosition;
+        [SerializeField] private HPViewController hpViewController;
+        [Inject] private DiContainer _container;
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            OnChangeHp += hpViewController.SetProgress;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            OnChangeHp += hpViewController.SetProgress;
+        }
 
         private void Awake()
         {
             Movable = new RigidbodyMovable(this, GetComponent<Rigidbody>());
-            Attachment = new PlayerAttacment(this);
+            Attachment = new PlayerAttachment(this);
             WorkerStateMachine.Start(this);
             SessionManager.SetPlayer(this);
+            CurrentWeapon = new GunWeapon(weaponSetup, attackPosition);
+            _container.Inject(CurrentWeapon);
         }
 
 
@@ -45,20 +64,16 @@ namespace Core.AI.Workers
             Movable.Move(this);
         }
 
-        protected override void ChangeState(bool state)
-        {
-            base.ChangeState(state);
-            if (!state)
-                FindTargetToAttack();
-        }
-
         public override CharacterSetup GetCharacterSetup() => setup;
 
-        public override void FindTargetToAttack()
+        public override void FindTargetToAttack(bool state)
         {
+            hpViewController.ShowHideHP(!state);
             var enemy = SessionManager.GetEnemy();
-            if (Attachment.Target == null)
+            if (Attachment.Target == null && !state)
                 Attachment.Target = enemy;
+            else
+                Attachment.Target = null;
         }
 
         public override void OnTriggerEnter(Collider other)

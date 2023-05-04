@@ -20,27 +20,9 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: attackTypeCharacter
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Setups.CharacterSetups.CharacterType,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: Setups.CharacterSetups.CharacterType, Assembly-CSharp
-    - Name: Type
-      Entry: 1
-      Data: EnemyController
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
+  speedMove: 6
   attackTime: 1
+  attackDistance: 100
+  maximumHp: 10
+  damage: 1

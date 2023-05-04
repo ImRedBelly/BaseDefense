@@ -1,6 +1,6 @@
 using Core.AI.Workers;
 
-namespace Core.AI.WorkersMovable
+namespace Core.AI.CharacterMovable
 {
     public abstract class Movable
     {
