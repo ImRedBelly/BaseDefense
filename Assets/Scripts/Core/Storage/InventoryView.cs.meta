@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 00f59c9ede3b486ea1a47c70b4219389
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - spawnStartPoint: {instanceID: 0}
+  - recipeCreator: {fileID: 1297186787684715691, guid: 9fd95250697cf4086b2854f688d7d0c2, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

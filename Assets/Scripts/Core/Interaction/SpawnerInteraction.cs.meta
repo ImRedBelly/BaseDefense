@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 5166f78f2c4f4251b7a807eb8db1aade
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - setup: {instanceID: 0}
+  - uiInteractionController: {fileID: 126710321672915816, guid: 92ee5dde356344da0955970df06bfaf8, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
