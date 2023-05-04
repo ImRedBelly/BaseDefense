@@ -1,34 +1,30 @@
-using Core.AI;
 using Core.AI.Workers;
-using Core.Interaction;
 using Core.StateMachine.States;
-using Zenject;
-using Interaction;
 using JetBrains.Annotations;
 
-namespace StateMachine
+namespace Core.StateMachine
 {
     public interface IWorkerState
     {
-        void OnEnter(Worker worker);
+        void OnEnter(Character character);
 
         void Update();
 
-        void OnExit(Worker worker);
+        void OnExit(Character character);
     }
 
     [UsedImplicitly]
     public class WorkerStateMachine
     {
-        private Worker _worker;
+        private Character character;
         private IWorkerState _currentState;
 
-        public void Start(Worker worker)
+        public void Start(Character character)
         {
-            _worker = worker;
+            this.character = character;
 
-            _currentState = CreateState<IdleState>();
-            _currentState.OnEnter(worker);
+            _currentState = CreateState<PeaceState>();
+            _currentState.OnEnter(character);
         }
 
         public void Update()
@@ -38,16 +34,13 @@ namespace StateMachine
 
         public void ChangeState(IWorkerState newState)
         {
-            _currentState.OnExit(_worker);
+            _currentState.OnExit(character);
             _currentState = newState;
-            _currentState.OnEnter(_worker);
+            _currentState.OnEnter(character);
         }
 
       
 
         public TState CreateState<TState>() where TState : new() => new TState();
-
-        public InteractingState CreateInteractingState(BaseInteraction interaction) =>
-            new InteractingState(interaction);
     }
 }

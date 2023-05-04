@@ -3,9 +3,7 @@
     public static class AnimationsPrefsNames
     {
         public static string Speed = "Speed";
-        public static string IsCarrying = "IsCarrying";
-        public static string Idle = "DynIdle";
-        public static string IsWorking = "IsWorking";
-        public static string IsSitting = "IsSitting";
+        public static string IsWeapon = "IsWeapon";
+        public static string Attack = "Attack";
     }
 }

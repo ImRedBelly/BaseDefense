@@ -1,29 +1,27 @@
 using Core.AI;
 using Core.AI.Workers;
-using StateMachine;
 
 namespace Core.StateMachine.States
 {
     public abstract class BaseState : IWorkerState
     {
-        protected Worker Worker;
-        
+        protected Character Character;
 
         public abstract void Update();
 
-        public virtual void OnEnter(Worker worker)
+        public virtual void OnEnter(Character character)
         {
-            Worker = worker;
+            Character = character;
         }
 
-        public virtual void OnExit(Worker worker)
+        public virtual void OnExit(Character character)
         {
         }
 
 
         protected void MoveToState(IWorkerState newState)
         {
-            Worker.WorkerStateMachine.ChangeState(newState);
+            Character.WorkerStateMachine.ChangeState(newState);
         }
     }
 }
