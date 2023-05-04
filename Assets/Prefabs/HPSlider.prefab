@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3847751322544833987}
   - component: {fileID: 3847751322544834012}
   - component: {fileID: 3847751322544834013}
-  - component: {fileID: 3847751322544834009}
   - component: {fileID: 3847751322544834015}
   - component: {fileID: 3847751322544834014}
   m_Layer: 0
@@ -86,18 +85,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
---- !u!225 &3847751322544834009
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3847751322544833984}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!114 &3847751322544834015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,8 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d77665ba637ba4e86a75194f76cbc34a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderHP: {fileID: 3847751322861194417}
-  canvasGroup: {fileID: 3847751322544834009}
+  sliderHp: {fileID: 3847751322861194417}
 --- !u!1 &3847751322770532205
 GameObject:
   m_ObjectHideFlags: 0

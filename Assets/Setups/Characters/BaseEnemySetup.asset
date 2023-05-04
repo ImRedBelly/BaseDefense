@@ -22,7 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   speedMove: 4
-  attackTime: 2
+  attackTime: 0.5
   attackDistance: 1
   maximumHp: 1
   damage: 1

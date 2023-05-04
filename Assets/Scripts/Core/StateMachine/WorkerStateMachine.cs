@@ -1,4 +1,4 @@
-using Core.AI.Workers;
+using Core.AI.Characters;
 using Core.StateMachine.States;
 using JetBrains.Annotations;
 

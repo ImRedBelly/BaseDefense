@@ -11,6 +11,6 @@ namespace Setups
     {
         public BulletController bulletController;
         public RecipeCreatorController recipeCreatorController;
-        public HPViewController hpViewController;
+        public HpViewController hpViewController;
     }
 }

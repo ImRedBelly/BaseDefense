@@ -1,5 +1,5 @@
 using Core.AI;
-using Core.AI.Workers;
+using Core.AI.Characters;
 
 namespace Core.StateMachine.States
 {

@@ -1,7 +1,7 @@
 ﻿using System;
+using Core.AI.Characters;
 using Lean.Pool;
 using UnityEngine;
-using Core.AI.Workers;
 
 namespace Core.Weapons
 {

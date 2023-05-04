@@ -1,7 +1,7 @@
 using System;
+using Core.AI.CharacterAttachment;
 using Core.AI.CharacterHealth;
 using Core.AI.CharacterMovable;
-using Core.AI.WorkerAttachment;
 using Core.StateMachine;
 using Core.StateMachine.States;
 using Setups;
@@ -10,7 +10,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 
-namespace Core.AI.Workers
+namespace Core.AI.Characters
 {
     public abstract class Character : SerializedMonoBehaviour, IHealthCharacter
     {
@@ -26,31 +26,11 @@ namespace Core.AI.Workers
         protected Movable Movable { get; set; }
         [Inject] protected SessionManager SessionManager;
 
-        protected virtual void Start()
+        public virtual void Initialize()
         {
             CurrentHp = GetCharacterSetup().maximumHp;
-        }
-
-        protected virtual void OnEnable()
-        {
             SessionManager.ChangeZonePlayer += ChangeState;
         }
-
-        protected virtual void OnDisable()
-        {
-            SessionManager.ChangeZonePlayer -= ChangeState;
-        }
-
-        protected virtual void ChangeState(bool state)
-        {
-            if (state)
-                WorkerStateMachine.ChangeState(new PeaceState());
-            else
-                WorkerStateMachine.ChangeState(new AttackState());
-
-            FindTargetToAttack(state);
-        }
-
         public abstract CharacterSetup GetCharacterSetup();
         public abstract void FindTargetToAttack(bool state);
 
@@ -68,16 +48,39 @@ namespace Core.AI.Workers
             CurrentHp -= damage;
             OnChangeHp?.Invoke(CurrentHp / GetCharacterSetup().maximumHp);
             if (CurrentHp <= 0)
-            {
                 OnDestroyCharacter?.Invoke();
-             Debug.LogError("DEAD: " + gameObject.name);   
-            }
         }
 
         public void Health(float health)
         {
+            if (CurrentHp >= GetCharacterSetup().maximumHp) return;
             CurrentHp += health;
             OnChangeHp?.Invoke(CurrentHp / GetCharacterSetup().maximumHp);
+        }
+
+        protected virtual void Start()
+        {
+           
+        }
+
+        protected virtual void OnEnable()
+        { 
+           
+        }
+
+        protected virtual void OnDisable()
+        {
+            SessionManager.ChangeZonePlayer -= ChangeState;
+        }
+
+        protected virtual void ChangeState(bool state)
+        {
+            if (state)
+                WorkerStateMachine.ChangeState(new PeaceState());
+            else
+                WorkerStateMachine.ChangeState(new AttackState());
+
+            FindTargetToAttack(state);
         }
     }
 

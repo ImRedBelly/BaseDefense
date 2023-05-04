@@ -1,6 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using Core.AI.Characters;
 using Zenject;
+using UnityEngine;
 
 namespace Core.Interactions
 {
@@ -8,6 +8,9 @@ namespace Core.Interactions
     {
         [Inject] protected SessionManager SessionManager;
 
+        public virtual void Interaction(Character character)
+        {
+        } 
         public virtual void OnEnter()
         {
         }

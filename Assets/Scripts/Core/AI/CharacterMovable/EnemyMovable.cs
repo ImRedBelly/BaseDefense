@@ -1,7 +1,7 @@
-﻿using Library;
+﻿using Core.AI.Characters;
+using Library;
 using UnityEngine;
 using UnityEngine.AI;
-using Core.AI.Workers;
 
 namespace Core.AI.CharacterMovable
 {
@@ -22,15 +22,14 @@ namespace Core.AI.CharacterMovable
             var speed = _agent.velocity.normalized.magnitude;
             character.Animator.SetFloat(AnimationsPrefsNames.Speed, Mathf.Round(speed));
 
-            if (character.Direction == Vector3.zero) return;
-            if (!EndPath(character.transform, character.Attachment.Target.transform,
+            if (!EndPath(character.transform.position, character.Direction,
                 character.GetCharacterSetup().attackDistance))
                 _agent.SetDestination(character.Direction);
         }
 
-        private bool EndPath(Transform startPoint, Transform target, float distanceAttack)
+        private bool EndPath(Vector3 startPoint, Vector3 target, float distanceAttack)
         {
-            float distance = Vector3.Distance(startPoint.position, target.position);
+            float distance = Vector3.Distance(startPoint, target);
             bool isStopped = distance < distanceAttack;
             _agent.isStopped = isStopped;
             return isStopped;

@@ -1,4 +1,4 @@
-using Core.AI.Workers;
+using Core.AI.Characters;
 
 namespace Core.AI.CharacterMovable
 {

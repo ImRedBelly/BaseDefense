@@ -1,6 +1,4 @@
-﻿using Core.AI.WorkerAttachment;
-using Core.AI.Workers;
-using Library;
+﻿using Core.AI.Characters;
 using UnityEngine;
 
 namespace Core.AI.CharacterAttachment

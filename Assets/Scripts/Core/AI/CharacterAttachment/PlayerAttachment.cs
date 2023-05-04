@@ -1,5 +1,4 @@
-﻿using Core.AI.WorkerAttachment;
-using Core.AI.Workers;
+﻿using Core.AI.Characters;
 using Library;
 using Setups;
 using Zenject;

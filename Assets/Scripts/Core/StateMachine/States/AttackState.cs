@@ -1,6 +1,6 @@
+using Core.AI.Characters;
 using Library;
 using UnityEngine;
-using Core.AI.Workers;
 
 namespace Core.StateMachine.States
 {
