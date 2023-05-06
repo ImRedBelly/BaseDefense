@@ -20,7 +20,6 @@ namespace Core.AI.Characters
         [SerializeField] private HpViewController hpViewController;
         [SerializeField] private InventoryView inventoryView;
 
-        [Inject] private DiContainer _container;
         private List<BaseInteraction> _interactions = new List<BaseInteraction>();
 
         public override Vector3 Direction
@@ -101,7 +100,7 @@ namespace Core.AI.Characters
             WorkerStateMachine.Start(this);
 
             CurrentWeapon = new GunWeapon(weaponSetup, attackPosition);
-            _container.Inject(CurrentWeapon);
+           Container.Inject(CurrentWeapon);
             Initialize();
         }
 

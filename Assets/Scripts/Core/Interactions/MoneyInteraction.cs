@@ -9,9 +9,9 @@ namespace Core.Interactions
     {
         [SerializeField] private ResourceType moneyResource;
 
-        protected override void OnEnable()
+        public override void Initialize()
         {
-            base.OnEnable();
+            base.Initialize();
             SessionManager.OnRestartGame += DestroyMoney;
         }
 

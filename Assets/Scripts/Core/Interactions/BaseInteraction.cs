@@ -9,6 +9,10 @@ namespace Core.Interactions
     {
         [Inject] protected SessionManager SessionManager;
 
+        public virtual void Initialize()
+        {
+            
+        } 
         protected virtual void OnEnable()
         {
             

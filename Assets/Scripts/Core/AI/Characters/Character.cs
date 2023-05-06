@@ -22,6 +22,7 @@ namespace Core.AI.Characters
         public abstract Vector3 Direction { get; }
         public Attachment Attachment { get; protected set; }
         public Animator Animator { get; protected set; }
+        [Inject] public DiContainer Container { get; protected set; }
 
         public WorkerStateMachine WorkerStateMachine = new WorkerStateMachine();
 

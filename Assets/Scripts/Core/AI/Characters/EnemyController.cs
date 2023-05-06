@@ -75,8 +75,10 @@ namespace Core.AI.Characters
             if (value < setup.chanceSpawnReward)
             {
                 var currentPosition = transform.position;
-                LeanPool.Spawn(setup.rewardObject, new Vector3(currentPosition.x, 0, currentPosition.z),
+                var reward = LeanPool.Spawn(setup.rewardObject, new Vector3(currentPosition.x, 0, currentPosition.z),
                     Quaternion.identity);
+                Container.Inject(reward);
+                reward.Initialize();
             }
 
             SessionManager.RemoveEnemy(this);

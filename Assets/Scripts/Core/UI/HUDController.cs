@@ -11,16 +11,23 @@ namespace Core.UI
     {
         [SerializeField] private Button buttonCallRestartDialog;
 
+        [Inject] private SessionManager _sessionManager;
         [Inject] private PrefabContainer _prefabContainer;
 
         private void Start()
         {
             buttonCallRestartDialog.onClick.AddListener(CallRestartDialog);
+            _sessionManager.Player.OnDestroyCharacter += CallRestartDialog;
+        }
+
+        private void OnDisable()
+        {
+            _sessionManager.Player.OnDestroyCharacter -= CallRestartDialog;
         }
 
         private void CallRestartDialog()
         {
-          LeanPool.Spawn(_prefabContainer.restartDialog, transform);
+            LeanPool.Spawn(_prefabContainer.restartDialog, transform);
         }
     }
 }
