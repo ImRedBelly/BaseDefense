@@ -1,12 +1,11 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace UI
 {
     public class CanvasRotator : MonoBehaviour
     {
-        private Camera _camera;
         private Transform _currentTrasnform;
+        private Transform _cameraTrasnform;
 
         private void OnEnable() => RotateCanvas();
 
@@ -16,10 +15,10 @@ namespace UI
         {
             if (_currentTrasnform == null)
                 _currentTrasnform = transform;
-            if (_camera == null)
-                _camera = Camera.main;
+            if (_cameraTrasnform == null)
+                _cameraTrasnform = Camera.main.transform;
 
-            _currentTrasnform.forward = _camera.transform.forward;
+            _currentTrasnform.forward = _cameraTrasnform.forward;
         }
     }
 }

@@ -1,20 +1,20 @@
-﻿using Core.AI.CharacterAttachment;
-using Core.AI.CharacterMovable;
-using Core.Weapons;
-using Lean.Pool;
-using Setups.CharacterSetups;
+﻿using Lean.Pool;
 using UnityEngine;
+using Core.Weapons;
 using UnityEngine.AI;
+using Setups.CharacterSetups;
+using Core.AI.CharacterMovable;
+using Core.AI.CharacterAttachment;
 
 namespace Core.AI.Characters
 {
     public class EnemyController : Character<BaseEnemySetup>
     {
-        public float DistanceToPlayer => (Direction - transform.position).magnitude;
         public IWeapon CurrentWeapon;
 
         public override Vector3 Direction =>
-            Attachment.Target == null ? Attachment.DefaultTarget.position
+            Attachment.Target == null
+                ? Attachment.DefaultTarget.position
                 : Attachment.Target.transform.position;
 
 
@@ -25,11 +25,16 @@ namespace Core.AI.Characters
             Attachment.Target = state ? null : Attachment.Target = SessionManager.Player;
         }
 
-        protected override void Start()
+        public float GetDistanceToPlayer(Vector3 positionPlayer)
         {
-            base.Start();
-            CurrentWeapon = new HandWeapon(this, weaponSetup);
+            return Vector3.Distance(transform.position, positionPlayer);
+        }
+
+        public override void Initialize()
+        {
+            base.Initialize();
             SessionManager.AddEnemy(this);
+            CurrentWeapon = new HandWeapon(this, weaponSetup);
         }
 
         protected override void OnEnable()
@@ -67,6 +72,13 @@ namespace Core.AI.Characters
         {
             SessionManager.RemoveEnemy(this);
             LeanPool.Despawn(this);
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (Attachment.Target != null)
+                Gizmos.DrawLine(transform.position + new Vector3(0, 1, 0),
+                    Attachment.Target.transform.position + new Vector3(0, 1, 0));
         }
     }
 }

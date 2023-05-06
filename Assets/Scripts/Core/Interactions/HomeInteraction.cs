@@ -1,5 +1,5 @@
-﻿using Core.AI.Characters;
-using UnityEngine;
+﻿using UnityEngine;
+using Core.AI.Characters;
 
 namespace Core.Interactions
 {

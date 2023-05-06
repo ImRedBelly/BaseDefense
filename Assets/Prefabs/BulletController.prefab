@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rbBullet: {fileID: 3263383348232968813}
-  speed: 5
+  speed: 8
 --- !u!54 &3263383348232968813
 Rigidbody:
   m_ObjectHideFlags: 0

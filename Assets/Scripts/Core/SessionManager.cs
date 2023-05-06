@@ -7,16 +7,20 @@ namespace Core
 {
     public class SessionManager
     {
+        public event Action MainEnemyDestroy;
         public Action<bool> ChangeZonePlayer;
 
         public Character Player { get; private set; }
+        public Character Enemy { get; private set; }
         private List<EnemyController> _enemies = new List<EnemyController>();
 
         public void SetPlayer(Character player) => Player = player;
 
-        public EnemyController GetEnemy()
+        public void FindMainEnemy()
         {
-            return _enemies.OrderBy(x => x.DistanceToPlayer).FirstOrDefault();
+            var enemy = _enemies.OrderBy(x =>
+                x.GetDistanceToPlayer(Player.transform.position)).FirstOrDefault();
+            Enemy = enemy;
         }
 
         public void AddEnemy(EnemyController enemyController)
@@ -28,7 +32,14 @@ namespace Core
         public void RemoveEnemy(EnemyController enemyController)
         {
             if (_enemies.Contains(enemyController))
-                _enemies.Remove(enemyController);
+            {
+                if (enemyController == Enemy)
+                {
+                    _enemies.Remove(enemyController);
+                    FindMainEnemy();
+                    MainEnemyDestroy?.Invoke();
+                }
+            }
         }
     }
 }

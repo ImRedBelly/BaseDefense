@@ -43,13 +43,9 @@ namespace Core.AI.Characters
 
         public override void FindTargetToAttack(bool state)
         {
-            hpViewController.ShowHideHp(!state || (state && CurrentHp < setup.maximumHp));
-            var enemy = SessionManager.GetEnemy();
-
-            if (Attachment.Target == null && !state)
-                Attachment.Target = enemy;
-            else
-                Attachment.Target = null;
+            hpViewController.ShowHideHp(!state || (CurrentHp < setup.maximumHp));
+            if (!state) FindMainEnemy();
+            else Attachment.Target = null;
         }
 
         protected override void Update()
@@ -83,12 +79,14 @@ namespace Core.AI.Characters
         {
             base.OnEnable();
             OnChangeHp += hpViewController.SetProgress;
+            SessionManager.MainEnemyDestroy += FindMainEnemy;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
             OnChangeHp += hpViewController.SetProgress;
+            SessionManager.MainEnemyDestroy -= FindMainEnemy;
         }
 
         private void Awake()
@@ -106,6 +104,12 @@ namespace Core.AI.Characters
         private void FixedUpdate()
         {
             Movable.Move(this);
+        }
+
+        private void FindMainEnemy()
+        {
+            SessionManager.FindMainEnemy();
+            Attachment.Target = SessionManager.Enemy;
         }
     }
 }

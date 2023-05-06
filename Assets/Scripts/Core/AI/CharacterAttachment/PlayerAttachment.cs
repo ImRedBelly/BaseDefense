@@ -1,14 +1,11 @@
-﻿using Core.AI.Characters;
-using Library;
-using Setups;
-using Zenject;
+﻿using Library;
+using Core.AI.Characters;
 
 namespace Core.AI.CharacterAttachment
 {
     public class PlayerAttachment : Attachment
     {
         private PlayerController _character;
-        [Inject] private PrefabContainer _prefabContainer;
 
         public PlayerAttachment(Character character)
         {
@@ -17,10 +14,13 @@ namespace Core.AI.CharacterAttachment
 
         public override void Attack()
         {
-            if (Target == null)
+            if (Target != null)
+            {
+                _character.Animator.SetTrigger(AnimationsPrefsNames.Attack);
+                _character.CurrentWeapon.Attack();
+            }
+            else
                 _character.FindTargetToAttack(false);
-            _character.Animator.SetTrigger(AnimationsPrefsNames.Attack);
-            _character.CurrentWeapon.Attack();
         }
     }
 }
