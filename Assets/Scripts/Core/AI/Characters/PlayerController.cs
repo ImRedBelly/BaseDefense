@@ -7,7 +7,6 @@ using Core.Weapons;
 using Setups.CharacterSetups;
 using UI;
 using UnityEngine;
-using Zenject;
 
 namespace Core.AI.Characters
 {
@@ -100,7 +99,7 @@ namespace Core.AI.Characters
             WorkerStateMachine.Start(this);
 
             CurrentWeapon = new GunWeapon(weaponSetup, attackPosition);
-           Container.Inject(CurrentWeapon);
+            Container.Inject(CurrentWeapon);
             Initialize();
         }
 

@@ -1,6 +1,7 @@
 using System;
 using Lean.Pool;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
 
@@ -22,7 +23,6 @@ namespace Core.UI.Dialogs
         }
 
         private void OnEnable() => Time.timeScale = 0;
-        private void OnDisable() => Time.timeScale = 1;
 
         private void CloseDialog()
         {
@@ -31,7 +31,9 @@ namespace Core.UI.Dialogs
 
         private void RestartGame()
         {
+            Time.timeScale = 1;
             _sessionManager.RestartGame();
+            SceneManager.LoadScene(0);
             CloseDialog();
         }
     }
