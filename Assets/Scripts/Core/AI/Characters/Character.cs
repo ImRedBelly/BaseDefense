@@ -7,6 +7,7 @@ using Core.StateMachine.States;
 using Setups;
 using Setups.CharacterSetups;
 using Sirenix.OdinInspector;
+using Storage;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +15,7 @@ namespace Core.AI.Characters
 {
     public abstract class Character : SerializedMonoBehaviour, IHealthCharacter
     {
+        public Inventory Inventory { get; private set; } = new Inventory();
         public event Action<float> OnChangeHp;
         public event Action OnDestroyCharacter;
         public float CurrentHp { get; private set; }
@@ -28,9 +30,11 @@ namespace Core.AI.Characters
 
         public virtual void Initialize()
         {
+            SessionManager.ChangeZonePlayer -= ChangeState;
             CurrentHp = GetCharacterSetup().maximumHp;
             SessionManager.ChangeZonePlayer += ChangeState;
         }
+
         public abstract CharacterSetup GetCharacterSetup();
         public abstract void FindTargetToAttack(bool state);
 
@@ -60,12 +64,10 @@ namespace Core.AI.Characters
 
         protected virtual void Start()
         {
-           
         }
 
         protected virtual void OnEnable()
-        { 
-           
+        {
         }
 
         protected virtual void OnDisable()

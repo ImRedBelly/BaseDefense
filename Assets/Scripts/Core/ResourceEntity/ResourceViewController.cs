@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Core.ResourceEntity
 {
-    public class RecipeViewController : MonoBehaviour
+    public class ResourceViewController : MonoBehaviour
     {
-        [SerializeField] private List<PointIngredient> ingredientPoints;
+        [SerializeField] private List<PointResource> ingredientPoints;
 
 
         public List<ResourceType> ResourceTypes
@@ -19,13 +19,19 @@ namespace Core.ResourceEntity
         {
             foreach (var point in ingredientPoints)
                 if (ingredients.ContainsKey(point.ResourceType))
+                {
                     point.gameObject.SetActive(true);
+                    point.ActivateResourceView(ingredients[point.ResourceType], true);
+                }
         }
 
         public void Reset()
         {
             foreach (var point in ingredientPoints)
+            {
+                point.ActivateResourceView(0, false);   
                 point.gameObject.SetActive(false);
+            }
         }
     }
 }

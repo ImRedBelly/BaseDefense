@@ -1,8 +1,8 @@
 ﻿using Core.ResourceEntity;
+using Core.UI.Dialogs;
 using Core.Weapons;
 using UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Setups
 {
@@ -10,7 +10,8 @@ namespace Setups
     public class PrefabContainer : ScriptableObject
     {
         public BulletController bulletController;
-        public RecipeCreatorController recipeCreatorController;
+        public ResourceCreatorController resourceCreatorController;
         public HpViewController hpViewController;
+        public RestartDialog restartDialog;
     }
 }

@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Core.ResourceEntity
 {
-    public class RecipeCreatorController : MonoBehaviour
+    public class ResourceCreatorController : MonoBehaviour
     {
-        [SerializeField] private List<RecipeViewController> recipeViewControllers;
+        [SerializeField] private List<ResourceViewController> recipeViewControllers;
 
         public void Initialize(Dictionary<ResourceType, int> ingredients)
         {

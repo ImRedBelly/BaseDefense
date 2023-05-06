@@ -13,7 +13,7 @@ namespace Core.Storage
     {
         [Inject] private PrefabContainer _prefabContainer;
 
-        private RecipeCreatorController _recipeCreator;
+        private ResourceCreatorController resourceCreator;
         
         public void UpdateView(Dictionary<ResourceType, int> ingredients)
         {
@@ -21,25 +21,25 @@ namespace Core.Storage
 
             if (ingredients.Where(x => x.Value > 0).ToList().Count <= 0) return;
 
-            _recipeCreator = LeanPool.Spawn(
-                _prefabContainer.recipeCreatorController,
+            resourceCreator = LeanPool.Spawn(
+                _prefabContainer.resourceCreatorController,
                 transform.position, Quaternion.identity, transform);
 
-            _recipeCreator.transform.localPosition = Vector3.zero;
-            _recipeCreator.Initialize(ingredients);
+            resourceCreator.transform.localPosition = Vector3.zero;
+            resourceCreator.Initialize(ingredients);
         }
 
         public void Reset()
         {
-            if (_recipeCreator != null)
+            if (resourceCreator != null)
             {
-                _recipeCreator.ResetCreator();
-                LeanPool.Despawn(_recipeCreator);
-                _recipeCreator = null;
+                resourceCreator.ResetCreator();
+                LeanPool.Despawn(resourceCreator);
+                resourceCreator = null;
             }
         }
 
         public void SetViewRecipe(bool isView) =>
-            _recipeCreator.transform.localScale = isView ? Vector3.one : Vector3.zero;
+            resourceCreator.transform.localScale = isView ? Vector3.one : Vector3.zero;
     }
 }

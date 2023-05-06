@@ -26,3 +26,5 @@ MonoBehaviour:
   attackDistance: 1
   maximumHp: 1
   damage: 1
+  rewardObject: {fileID: 3243603590592848269, guid: c741848d9e77bfb458bc66b99449072b, type: 3}
+  chanceSpawnReward: 70

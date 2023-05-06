@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Core.AI.CharacterAttachment;
 using Core.AI.CharacterMovable;
 using Core.Interactions;
+using Core.Storage;
 using Core.Weapons;
 using Setups.CharacterSetups;
 using UI;
@@ -17,6 +18,7 @@ namespace Core.AI.Characters
         [SerializeField] private Transform orientation;
         [SerializeField] private Transform attackPosition;
         [SerializeField] private HpViewController hpViewController;
+        [SerializeField] private InventoryView inventoryView;
 
         [Inject] private DiContainer _container;
         private List<BaseInteraction> _interactions = new List<BaseInteraction>();
@@ -60,7 +62,7 @@ namespace Core.AI.Characters
             if (other.TryGetComponent(out BaseInteraction interaction))
                 if (!_interactions.Contains(interaction))
                 {
-                    interaction.OnEnter();
+                    interaction.OnEnter(this);
                     _interactions.Add(interaction);
                 }
         }
@@ -80,6 +82,7 @@ namespace Core.AI.Characters
             base.OnEnable();
             OnChangeHp += hpViewController.SetProgress;
             SessionManager.MainEnemyDestroy += FindMainEnemy;
+            Inventory.OnChangeResource += inventoryView.UpdateView;
         }
 
         protected override void OnDisable()
@@ -87,6 +90,7 @@ namespace Core.AI.Characters
             base.OnDisable();
             OnChangeHp += hpViewController.SetProgress;
             SessionManager.MainEnemyDestroy -= FindMainEnemy;
+            Inventory.OnChangeResource -= inventoryView.UpdateView;
         }
 
         private void Awake()

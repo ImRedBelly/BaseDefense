@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.AI.Characters;
+using Lean.Pool;
+using Library.Data;
+using UnityEngine;
 
 namespace Core
 {
     public class SessionManager
     {
+        public CurrencyDataModel CurrencyDataModel { get; private set; } = new CurrencyDataModel();
+        public event Action OnRestartGame;
         public event Action MainEnemyDestroy;
         public Action<bool> ChangeZonePlayer;
 
@@ -40,6 +45,20 @@ namespace Core
                     MainEnemyDestroy?.Invoke();
                 }
             }
+        }
+
+        public void RestartGame()
+        {
+            for (int i = _enemies.Count - 1; i >= 0; i--)
+            {
+                var enemy = _enemies[i];
+                _enemies.Remove(enemy);
+                LeanPool.Despawn(enemy);
+            }
+
+            Player.transform.position = Vector3.zero;
+            Player.Initialize();
+            OnRestartGame?.Invoke();
         }
     }
 }

@@ -47,6 +47,7 @@ namespace Core.AI.Characters
         {
             base.OnDisable();
             OnDestroyCharacter -= DestroyCharacter;
+            Attachment.Target = null;
         }
 
 
@@ -70,15 +71,16 @@ namespace Core.AI.Characters
 
         private void DestroyCharacter()
         {
+            var value = Random.Range(0, 100);
+            if (value < setup.chanceSpawnReward)
+            {
+                var currentPosition = transform.position;
+                LeanPool.Spawn(setup.rewardObject, new Vector3(currentPosition.x, 0, currentPosition.z),
+                    Quaternion.identity);
+            }
+
             SessionManager.RemoveEnemy(this);
             LeanPool.Despawn(this);
-        }
-
-        private void OnDrawGizmos()
-        {
-            if (Attachment.Target != null)
-                Gizmos.DrawLine(transform.position + new Vector3(0, 1, 0),
-                    Attachment.Target.transform.position + new Vector3(0, 1, 0));
         }
     }
 }

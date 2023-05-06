@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: PrefabContainer
   m_EditorClassIdentifier: 
   bulletController: {fileID: 2346412026668841392, guid: 26c163c58b35fc34d87fc86d5bb3e8eb, type: 3}
-  recipeCreatorController: {fileID: 0}
-  hpViewController: {fileID: 0}
+  resourceCreatorController: {fileID: 6551636388386890545, guid: d07487e6fa97e3642b197c523ff4b07f, type: 3}
+  hpViewController: {fileID: 3847751322544834014, guid: 78af9c0e8903ac543bdb76d47a0a08f8, type: 3}
+  restartDialog: {fileID: 3722531688262929512, guid: 6aa485a74deecf04180cf36f785c6b3d, type: 3}

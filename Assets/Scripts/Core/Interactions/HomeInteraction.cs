@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using Core.AI.Characters;
 
 namespace Core.Interactions
@@ -19,10 +20,13 @@ namespace Core.Interactions
             }
         }
 
-        public override void OnEnter()
+        public override void OnEnter(Character character)
         {
-            base.OnEnter();
+            base.OnEnter(character);
             SessionManager.ChangeZonePlayer.Invoke(true);
+            var allMoney = character.Inventory.Items.Sum(x => x.Value);
+            character.Inventory.Clear();
+            SessionManager.CurrencyDataModel.AppendCurrency(allMoney);
         }
 
         public override void OnExit()

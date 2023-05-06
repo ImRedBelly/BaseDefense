@@ -1,4 +1,5 @@
-﻿using Core.AI.Characters;
+﻿using System;
+using Core.AI.Characters;
 using Zenject;
 using UnityEngine;
 
@@ -8,10 +9,20 @@ namespace Core.Interactions
     {
         [Inject] protected SessionManager SessionManager;
 
+        protected virtual void OnEnable()
+        {
+            
+        }
+
+        protected virtual void OnDisable()
+        {
+            
+        }
+
         public virtual void Interaction(Character character)
         {
         } 
-        public virtual void OnEnter()
+        public virtual void OnEnter(Character character)
         {
         }
 
